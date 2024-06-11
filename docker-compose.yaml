@@ -1,0 +1,36 @@
+services:
+  postgres:
+    env_file: ./docker/.env
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB} || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    volumes:
+        - db_home:/var/lib/postgresql/data
+    networks:
+        - backend
+
+  ads:
+    env_file: ./docker/.env
+    build:
+        context: ./backend
+    ports:
+      - "8080:8080"
+    depends_on:
+        - postgres
+    command: ["/app/docker/docker-bootstrap.sh"]
+    volumes:
+      - ./docker:/app/docker
+    networks:
+        - backend
+volumes:
+  db_home:
+    external: false
+networks:
+    backend:
+        driver: bridge

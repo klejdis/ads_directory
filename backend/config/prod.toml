@@ -1,0 +1,7 @@
+[ads_directory]
+base_path="/api/1/ads"
+
+[ads_directory.quart]
+ENV="production"
+DEBUG=false
+TESTING=false

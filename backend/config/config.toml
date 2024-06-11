@@ -1,0 +1,13 @@
+# local development
+[ads_directory]
+base_path="/api/ads"
+
+[ads_directory.quart]
+ENV="development"
+DEBUG=true
+TESTING=true
+JWT_SECRET_KEY="secret"
+
+[ads_directory.database]
+URI="sqlite+aiosqlite:///ads.db"
+ECHO=true

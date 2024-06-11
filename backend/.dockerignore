@@ -1,0 +1,10 @@
+*
+
+!*.py
+!/pyproject.toml
+!/poetry.lock
+!/hypercorn.toml
+!config
+!ads_directory
+!alembic.ini
+!migrations
